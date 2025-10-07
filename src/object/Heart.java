@@ -1,0 +1,31 @@
+package object;
+
+import entity.Entity;
+import main.GamePanel;
+
+import javax.imageio.ImageIO;
+import java.io.IOException;
+
+public class Heart extends Entity {
+
+    GamePanel gp;
+    public Heart(GamePanel gp) {
+        super(gp);
+        this.gp = gp;
+
+        type = type_pickupOnly;
+        name = "Heart";
+        value = 2;
+        down1 = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
+        image = setup("/objects/heart_full", gp.tileSize, gp.tileSize);
+        image2 = setup("/objects/heart_half", gp.tileSize, gp.tileSize);
+        image3 = setup("/objects/heart_empty", gp.tileSize, gp.tileSize);
+    }
+
+    public boolean use(Entity entity) {
+//        gp.playSE(2);
+        gp.ui.addMessage("Life + " + value);
+        entity.life += value;
+        return true;
+    }
+}
